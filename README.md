@@ -1,59 +1,195 @@
-# FigmaDashboard
+# Figma Dashboard (Angular + Node.js)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+Тестовый проект: веб-приложение с клиентской и серверной частями для просмотра дашбордов/ассетов, аналитики и журналирования действий.
 
-## Development server
+## Что реализовано
 
-To start a local development server, run:
+- **Клиент**: Angular (standalone components, routing)
+- **Сервер**: Node.js + Express
+- **Навигация**:
+  - `Dashboard` (дашборды)
+  - `Asset` (карточка устройства с вкладками аналитики и описания)
+  - `ErrorPage` (страница ошибки с возвратом)
+- **Работа с ассетами**:
+  - занять устройство
+  - освободить устройство (с сохранением события ремонта/проверки)
+- **Аналитика**:
+  - фильтры по периоду, виду работ, пользователю, поиску по деталям
+  - сортировка по дате
+  - экспорт:
+    - **PDF**
+    - **Excel-совместимый CSV** (корректная кириллица для Windows/Excel)
+- **Пользователь**:
+  - загрузка аватара
+- **Хранение данных**:
+  - JSON-файлы на сервере (`server/data`)
+  - загруженные файлы (`server/uploads`)
+
+---
+
+## Технологии
+
+### Frontend
+- Angular
+- TypeScript
+- RxJS
+- SCSS
+
+### Backend
+- Node.js
+- Express
+- Multer
+- Sharp
+- CORS
+
+### Экспорт
+- `pdfmake` (PDF)
+- CSV (Excel-compatible)
+
+### Контейнеризация
+- Docker
+- Docker Compose
+
+---
+
+## Структура проекта
+
+```text
+figma-dashboard/
+├─ src/                        # Angular-приложение
+│  ├─ app/
+│  │  ├─ pages/
+│  │  │  ├─ dashboard-page/
+│  │  │  ├─ asset-page/
+│  │  │  │  └─ tabs/
+│  │  │  │     ├─ asset-description/
+│  │  │  │     └─ asset-analytics/
+│  │  │  └─ error-page/
+│  │  ├─ layout/header/
+│  │  └─ shared/
+│  │     ├─ components/asset-card/
+│  │     ├─ services/
+│  │     └─ models.ts
+│  └─ ...
+├─ server/
+│  ├─ index.js                 # Express API
+│  ├─ data/                    # users.json, assets.json, events.json
+│  ├─ uploads/                 # аватары и прочие загрузки
+│  └─ package.json
+├─ Dockerfile
+├─ docker-compose.yml
+├─ proxy.conf.json
+├─ angular.json
+└─ package.json
+````
+
+---
+
+## Требования
+
+* Node.js 20+
+* npm 10+
+* (опционально) Docker + Docker Compose
+
+---
+
+## Запуск локально (без Docker)
+
+### 1) Установить зависимости
 
 ```bash
-ng serve
+npm install
+cd server && npm install && cd ..
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 2) Запустить backend
 
 ```bash
-ng generate component component-name
+cd server
+npm run dev
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Сервер поднимется на `http://127.0.0.1:3000`.
+
+### 3) Запустить frontend (в новом терминале)
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Frontend поднимется на `http://localhost:4200`.
 
-To build the project run:
+> Для локальной разработки используется `proxy.conf.json` (`/api` и `/uploads` проксируются на backend).
+
+---
+
+## Запуск через Docker
 
 ```bash
-ng build
+docker compose up -d --build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+После запуска приложение доступно по адресу:
 
-## Running unit tests
+* `http://<host>:8080`
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Остановка:
 
 ```bash
-ng test
+docker compose down
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Полная очистка (включая volumes):
 
 ```bash
-ng e2e
+docker compose down -v
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Основные маршруты UI
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* `/dashboard` — дашборды
+* `/asset/:id/description` — описание ассета
+* `/asset/:id/analytics` — аналитика ассета
+* `/error` — страница ошибки
+* `*` → редирект на `/error`
+
+---
+
+## Основные API endpoints
+
+* `GET /api/users`
+* `GET /api/users/me`
+* `POST /api/users/me/avatar`
+* `GET /api/assets`
+* `GET /api/assets/:id`
+* `POST /api/assets/:id/claim`
+* `POST /api/assets/:id/release`
+* `GET /api/assets/:id/events`
+* `GET /api/assets/:id/events/meta`
+* `GET /uploads/*` (статические файлы)
+
+---
+
+## Данные и сиды
+
+Сервер использует JSON-файлы:
+
+* `server/data/users.json`
+* `server/data/assets.json`
+* `server/data/events.json`
+
+При первом старте файлы создаются автоматически, если отсутствуют.
+
+---
+
+```md
+# LINKS
+
+- [Deploy](https://biocad-test.remystorage.ru/dashboard)
+- [Code](https://github.com/nanatic/biocad-test)
+```
+
+---
+
