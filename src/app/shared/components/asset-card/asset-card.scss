@@ -1,3 +1,9 @@
+:host {
+  display: block;
+  height: 100%;
+  min-width: 0;
+}
+
 .card {
   background: #fff;
   border: 1px solid #eee;
@@ -7,6 +13,7 @@
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -72,6 +79,7 @@
 
   flex-wrap: nowrap;
   min-width: 0;
+  min-height: 34px;
 }
 
 .id {
@@ -87,44 +95,54 @@
 }
 
 .status-slot {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  width: 126px;
+  flex: 0 0 126px;
 
-  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
   margin-left: 8px;
 }
 
 .status-wrap {
   position: relative;
+  width: max-content;
+  max-width: 100%;
 }
 
 .status-btn,
 .status-static {
-  white-space: nowrap;
-  flex: 0 0 auto;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 10px;
+
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fff;
 
   display: inline-flex;
   align-items: center;
   gap: 8px;
+
+  width: auto;
+  min-width: 0;
+  white-space: nowrap;
   line-height: 1;
+  font-size: 13px;
 }
 
 .status-btn {
-  border: 1px solid #eee;
-  background: #fff;
-  padding: 6px 10px;
-  border-radius: 10px;
   cursor: pointer;
+}
 
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  line-height: 1
+.status-static {
+  cursor: default;
 }
 
 .status-text {
   color: #333;
+  line-height: 1;
 }
 
 .status-text.busy {
@@ -234,6 +252,7 @@
   justify-content: flex-end;
   gap: 16px;
   padding-top: 6px;
+  margin-top: auto;
 }
 
 .marker {
@@ -256,7 +275,10 @@
 }
 
 @media (max-width: 720px) {
-  .card, .top, .content, .row1 {
+  .card,
+  .top,
+  .content,
+  .row1 {
     max-width: 100%;
     min-width: 0;
   }
@@ -268,11 +290,18 @@
 
   .id {
     flex: 1 1 auto;
-    min-width: 0; 
+    min-width: 0;
   }
 
   .status-slot {
     flex: 0 0 auto;
     margin-left: 8px;
+    min-width: 116px;
+  }
+
+  .status-wrap,
+  .status-btn,
+  .status-static {
+    min-width: 116px;
   }
 }
