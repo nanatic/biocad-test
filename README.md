@@ -187,8 +187,8 @@ docker compose down -v
 ```md
 # LINKS
 
-- [Deploy](https://biocad-test.remystorage.ru/dashboard)
-- [Code](https://github.com/nanatic/biocad-test)
+- Deploy: https://biocad-test.remystorage.ru/dashboard
+- Code: https://github.com/nanatic/biocad-test
 ```
 
 ---
