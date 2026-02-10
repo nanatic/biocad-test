@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "login": "kabanov",
+    "displayName": "Кабанов А.",
+    "avatarFile": "rabbit.jpg"
+  },
+  {
+    "id": 2,
+    "login": "ivanov",
+    "displayName": "Иванов И.",
+    "avatarFile": "cat.jpg"
+  },
+  {
+    "id": 3,
+    "login": "petrova",
+    "displayName": "Петрова П.",
+    "avatarFile": null
+  },
+  {
+    "id": 4,
+    "login": "me",
+    "displayName": "Я",
+    "avatarFile": "avatar_4.jpg"
+  }
+]

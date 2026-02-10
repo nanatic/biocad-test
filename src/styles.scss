@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  background: #f6f6f6;
+  color: #222;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+}
+
+.page {
+  padding: 16px;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: 12px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

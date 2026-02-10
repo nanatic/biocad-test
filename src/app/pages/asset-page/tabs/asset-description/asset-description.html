@@ -1,0 +1,42 @@
+<section class="desc" *ngIf="asset as a">
+  <div class="block">
+    <div class="row">
+      <div class="label">ID в ERP (GUID)</div>
+      <div class="value">{{ a.description?.erpGuid || '—' }}</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Серийный номер</div>
+      <div class="value">{{ a.description?.serialNumber || '—' }}</div>
+    </div>
+
+    <div class="row">
+      <div class="label">ID в паспорте</div>
+      <div class="value">{{ a.description?.passportId || '—' }}</div>
+    </div>
+
+    <div class="row">
+      <div class="label">EO</div>
+      <div class="value">{{ a.id }}</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="block">
+    <div class="row">
+      <div class="label">Название</div>
+      <div class="value">{{ a.name || '—' }}</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Класс</div>
+      <div class="value">{{ a.description?.className || '—' }}</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Производитель</div>
+      <div class="value">{{ a.description?.manufacturer || '—' }}</div>
+    </div>
+  </div>
+</section>

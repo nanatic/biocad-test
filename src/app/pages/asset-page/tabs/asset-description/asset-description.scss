@@ -1,0 +1,33 @@
+.desc {
+  padding: 18px 0;
+}
+
+.block {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 14px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 11px;
+  color: #9a9a9a;
+  letter-spacing: 0.02em;
+}
+
+.value {
+  font-size: 13px;
+  color: #222;
+  word-break: break-word;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 18px 0;
+}

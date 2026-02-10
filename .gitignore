@@ -1,0 +1,40 @@
+# ===== Dependencies =====
+node_modules/
+server/node_modules/
+
+# ===== Angular build/cache =====
+dist/
+.angular/
+coverage/
+
+# ===== Logs =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ===== Env / secrets =====
+.env
+.env.*
+!.env.example
+
+# ===== IDE / OS =====
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ===== Docker local artifacts =====
+docker-compose.override.yml
+
+# ===== Runtime uploads  =====
+server/uploads/*
+!server/uploads/.gitkeep
+
+server/data/*
+!server/data/.gitkeep
+!server/data/users.json
+!server/data/assets.json
+!server/data/events.json

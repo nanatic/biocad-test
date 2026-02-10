@@ -1,0 +1,89 @@
+<article class="card" [routerLink]="['/asset', asset.id, 'analytics']">
+  <div class="top">
+    <div class="device-icon-wrap">
+      <img class="device-icon" [src]="getDeviceIcon(asset.type)" alt="device" />
+    </div>
+
+    <div class="content">
+      <div class="row1">
+        <div class="id">{{ asset.id }}</div>
+        <div class="status-slot">
+          <div class="status-wrap">
+            <ng-container *ngIf="asset.status === 'busy' && !asset.isMine; else canInteractTpl">
+              <div class="status-static">
+                <span class="status-text busy">Занят</span>
+                <img
+                  class="mini-avatar"
+                  [src]="asset.busyBy?.avatarUrl || 'assets/avatar-placeholder.svg'"
+                  alt=""
+                />
+              </div>
+            </ng-container>
+
+            <ng-template #canInteractTpl>
+              <button class="status-btn" type="button" (click)="toggleMenu($event)">
+                <span
+                  class="status-text"
+                  [class.busy]="asset.status === 'busy'"
+                  [class.mine]="asset.status === 'busy' && asset.isMine"
+                >
+                  {{ asset.status === 'busy' ? 'Занят' : 'Свободен' }}
+                </span>
+
+                <span class="chev">▾</span>
+
+                <img
+                  *ngIf="asset.status === 'busy'"
+                  class="mini-avatar"
+                  [src]="asset.busyBy?.avatarUrl || 'assets/avatar-placeholder.svg'"
+                  alt=""
+                />
+              </button>
+
+              <div class="menu" *ngIf="menuOpen">
+                <button
+                  *ngIf="asset.status === 'free'"
+                  type="button"
+                  class="menu-item"
+                  (click)="onClaim($event)"
+                >
+                  Занять
+                </button>
+
+                <button
+                  *ngIf="asset.status === 'busy' && asset.isMine"
+                  type="button"
+                  class="menu-item danger"
+                  (click)="onRelease($event)"
+                >
+                  Освободить
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="name" [title]="asset.name">
+        {{ asset.name }}
+      </div>
+
+      <div class="location">
+        <img class="loc-icon" src="assets/location.svg" alt="" />
+        <span>{{ asset.room }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="marker">
+      <img class="m-icon" src="assets/warnings.svg" alt="warnings" />
+      <span class="m-value">{{ asset.counts.warnings }}</span>
+    </div>
+
+    <div class="marker">
+      <img class="m-icon" src="assets/alarms.svg" alt="alarms" />
+      <span class="m-value">{{ asset.counts.alarms }}</span>
+    </div>
+  </div>
+</article>

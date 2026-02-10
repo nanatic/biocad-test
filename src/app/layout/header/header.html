@@ -1,0 +1,55 @@
+<header class="header">
+  <div class="left">
+    <button class="icon-btn burger" type="button" (click)="toggleNav()" aria-label="Меню">
+      ☰
+    </button>
+
+    <a class="brand" [routerLink]="['/dashboard']" aria-label="На дашборды">
+      <img class="logo" src="assets/logo.svg" alt="botanique" />
+    </a>
+  </div>
+
+  <div class="right">
+    <button class="avatar-btn" type="button" (click)="fileInput.click()" aria-label="Загрузить аватар">
+      <img
+        class="avatar"
+        [src]="(me$ | async)?.avatarUrl || 'assets/avatar-placeholder.svg'"
+        alt="User"
+      />
+    </button>
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      class="hidden-file"
+      (change)="onAvatarSelected($event)"
+    />
+  </div>
+</header>
+
+<div class="backdrop" [class.open]="navOpen" (click)="closeNav()"></div>
+
+<aside class="drawer" [class.open]="navOpen" aria-label="Меню">
+  <a routerLink="/dashboard" routerLinkActive="active" (click)="closeNav()">Дашборды</a>
+
+  <a
+    *ngIf="currentAssetId as id"
+    [routerLink]="['/asset', id, 'description']"
+    routerLinkActive="active"
+    (click)="closeNav()"
+  >
+    Текущий ассет
+  </a>
+
+  <a
+    *ngIf="currentAssetId as id"
+    [routerLink]="['/asset', id, 'analytics']"
+    routerLinkActive="active"
+    (click)="closeNav()"
+  >
+    Аналитика ассета
+  </a>
+
+  <a *ngIf="!currentAssetId" class="disabled">Чтобы посмотреть аналитику ассета - кликните на необходимый</a>
+</aside>

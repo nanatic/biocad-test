@@ -1,0 +1,10 @@
+<section class="dashboard">
+  <div class="grid">
+    <app-asset-card
+      *ngFor="let a of (assets$ | async); trackBy: trackById"
+      [asset]="a"
+      (claim)="onClaim($event)"
+      (release)="onRelease($event)"
+    ></app-asset-card>
+  </div>
+</section>

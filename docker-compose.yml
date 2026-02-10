@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  figma-dashboard:
+    build: .
+    container_name: figma-dashboard
+    ports:
+      - "8080:3000"
+    restart: unless-stopped
+    volumes:
+      - ./server/data:/app/data
+      - ./server/uploads:/app/uploads
+
+
+volumes:
+  figma_data:
+  figma_uploads:

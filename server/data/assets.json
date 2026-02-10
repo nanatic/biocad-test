@@ -1,0 +1,154 @@
+[
+  {
+    "id": "10025426",
+    "type": "recirculation",
+    "name": "Рециркуляционная вентиляция, Trox, xcube, Приточно-рециркуляционная установка 2С-ПР10.1",
+    "room": "101",
+    "status": "free",
+    "busyByUserId": null,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Trox"
+    }
+  },
+  {
+    "id": "10025427",
+    "type": "osmometr",
+    "name": "Осмометр Киви Осмометрия ОСКР-1М",
+    "room": "2.5.03/2",
+    "status": "busy",
+    "busyByUserId": 1,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Киви"
+    }
+  },
+  {
+    "id": "10025428",
+    "type": "recirculation",
+    "name": "Рециркуляционная вентиляция, Trox, xcube, Приточно-рециркуляционная установка 2С-ПР10.1",
+    "room": "101",
+    "status": "free",
+    "busyByUserId": null,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Trox"
+    }
+  },
+  {
+    "id": "10025429",
+    "type": "unknown",
+    "name": "Система щелочи, Watertown, NaOH",
+    "room": "2.5.03/2",
+    "status": "free",
+    "busyByUserId": null,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "28fedb4b-85a1-11e8-80e5-00155df02900",
+      "serialNumber": "37767108",
+      "passportId": "18941",
+      "className": "Система щелочи",
+      "manufacturer": "Watertown"
+    }
+  },
+  {
+    "id": "10025430",
+    "type": "osmometr",
+    "name": "Осмометр Киви Осмометрия ОСКР-1М",
+    "room": "2.5.03/2",
+    "status": "busy",
+    "busyByUserId": 2,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Киви"
+    }
+  },
+  {
+    "id": "10025431",
+    "type": "osmometr",
+    "name": "Осмометр Киви Осмометрия ОСКР-1М",
+    "room": "101",
+    "status": "busy",
+    "busyByUserId": 1,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Киви"
+    }
+  },
+  {
+    "id": "00-024004",
+    "type": "box",
+    "name": "Бокс биологической безопасности",
+    "room": "507",
+    "status": "busy",
+    "busyByUserId": 3,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": ""
+    }
+  },
+  {
+    "id": "10025432",
+    "type": "recirculation",
+    "name": "Рециркуляционная вентиляция, Trox, xcube, Приточно-рециркуляционная установка 2С-ПР10.1",
+    "room": "010",
+    "status": "free",
+    "busyByUserId": null,
+    "counts": {
+      "warnings": 0,
+      "alarms": 0
+    },
+    "description": {
+      "erpGuid": "",
+      "serialNumber": "",
+      "passportId": "",
+      "className": "",
+      "manufacturer": "Trox"
+    }
+  }
+]

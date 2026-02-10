@@ -1,0 +1,139 @@
+<section class="analytics">
+  <div class="range">
+    <input type="datetime-local" [(ngModel)]="from" (change)="onCustomDatesChanged()" />
+    <span class="arrow">→</span>
+    <input type="datetime-local" [(ngModel)]="to" (change)="onCustomDatesChanged()" />
+
+    <div class="spacer"></div>
+
+    <div class="more-wrap">
+      <button
+        type="button"
+        class="more"
+        (click)="togglePopover($event, 'export')"
+        aria-label="Экспорт"
+      >
+        ⋮
+      </button>
+
+      <div class="popover export-pop" *ngIf="openPopover === 'export'" (click)="$event.stopPropagation()">
+        <button class="pop-item" type="button" (click)="exportPdf()">Скачать PDF</button>
+        <button class="pop-item" type="button" (click)="exportExcel()">Скачать Excel (CSV)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="presets">
+    <button type="button" [class.active]="preset==='day'" (click)="setPreset('day')">День</button>
+    <button type="button" [class.active]="preset==='week'" (click)="setPreset('week')">Неделя</button>
+    <button type="button" [class.active]="preset==='2w'" (click)="setPreset('2w')">2 недели</button>
+    <button type="button" [class.active]="preset==='month'" (click)="setPreset('month')">Месяц</button>
+    <button type="button" [class.active]="preset==='3m'" (click)="setPreset('3m')">3 месяца</button>
+    <button type="button" [class.active]="preset==='6m'" (click)="setPreset('6m')">Полгода</button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="th th-sort" (click)="toggleSort()">
+          <div class="th-inner">
+            <span>Дата и время</span>
+            <span class="sort">{{ sortDir }}</span>
+          </div>
+        </th>
+
+        <th class="th">
+          <div class="th-inner">
+            <span>Вид работ</span>
+            <button
+              class="th-btn"
+              type="button"
+              (click)="togglePopover($event, 'workType')"
+              aria-label="Фильтр по виду работ"
+            >
+              ▾
+            </button>
+          </div>
+
+          <div class="popover" *ngIf="openPopover === 'workType'" (click)="$event.stopPropagation()">
+            <button class="pop-item" type="button" (click)="setWorkType('')">Все</button>
+            <button
+              class="pop-item"
+              type="button"
+              *ngFor="let t of workTypes"
+              (click)="setWorkType(t)"
+            >
+              {{ t }}
+            </button>
+          </div>
+        </th>
+
+        <th class="th">
+          <div class="th-inner">
+            <span>Дополнительно</span>
+            <button
+              class="th-btn"
+              type="button"
+              (click)="togglePopover($event, 'details')"
+              aria-label="Поиск по дополнительной информации"
+            >
+              🔍
+            </button>
+          </div>
+
+          <div class="popover pop-search" *ngIf="openPopover==='details'" (click)="$event.stopPropagation()">
+            <input
+              class="pop-input"
+              type="text"
+              [(ngModel)]="detailsQuery"
+              (input)="apply()"
+              placeholder="Поиск…"
+            />
+            <button class="pop-item" type="button" (click)="detailsQuery=''; apply(); openPopover=null">
+              Очистить
+            </button>
+          </div>
+        </th>
+
+        <th class="th">
+          <div class="th-inner">
+            <span>Пользователь</span>
+            <button
+              class="th-btn"
+              type="button"
+              (click)="togglePopover($event, 'user')"
+              aria-label="Фильтр по пользователю"
+            >
+              ▾
+            </button>
+          </div>
+
+          <div class="popover" *ngIf="openPopover === 'user'" (click)="$event.stopPropagation()">
+            <button class="pop-item" type="button" (click)="setUser('')">Все</button>
+            <button
+              class="pop-item"
+              type="button"
+              *ngFor="let u of users"
+              (click)="setUser(u)"
+            >
+              {{ u }}
+            </button>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of visibleEvents">
+        <td>{{ formatTs(e.ts) }}</td>
+        <td>{{ e.type }}</td>
+        <td>{{ e.result }}</td>
+        <td class="user">{{ e.userLogin }}</td>
+      </tr>
+
+      <tr *ngIf="visibleEvents.length === 0">
+        <td colspan="4">Нет данных для выбранного периода/фильтров</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -1,0 +1,117 @@
+<section class="asset-page">
+  <div class="container">
+    <a class="back-link" [routerLink]="['/dashboard']" aria-label="Вернуться к dashboard">
+      ← Вернуться к dashboard
+    </a>
+    <div class="asset-card">
+      <header class="asset-head">
+        <div class="left">
+          <div class="device-icon">
+            <img [src]="deviceIconUrl" alt="" />
+          </div>
+
+          <div class="meta">
+            <div class="title-row">
+              <h1 class="title">{{ asset?.name }}</h1>
+
+              <div class="actions" *ngIf="asset as a">
+                <button
+                  *ngIf="a.status === 'free'"
+                  class="status action free"
+                  type="button"
+                  (click)="onClaim()"
+                  [disabled]="actionLoading"
+                >
+                  {{ actionLoading ? '...' : 'Занять' }}
+                </button>
+
+                <button
+                  *ngIf="a.status === 'busy' && a.isMine"
+                  class="status action mine"
+                  type="button"
+                  (click)="openReleaseForm()"
+                >
+                  Освободить
+                </button>
+
+                <div *ngIf="a.status === 'busy' && !a.isMine" class="status locked">
+                  <span>Занят</span>
+                  <img
+                    class="mini-avatar"
+                    [src]="a.busyBy?.avatarUrl || 'assets/avatar-placeholder.svg'"
+                    alt=""
+                  />
+                </div>
+
+                <button class="fav" type="button" (click)="toggleFav()" [attr.aria-pressed]="isFav">
+                  ♥
+                </button>
+              </div>
+            </div>
+
+            <div class="id">{{ asset?.id }}</div>
+            <div class="error-msg" *ngIf="actionError">{{ actionError }}</div>
+          </div>
+        </div>
+      </header>
+
+      <nav class="tabs" *ngIf="assetId">
+        <a [routerLink]="['/asset', assetId, 'analytics']" routerLinkActive="active">АНАЛИТИКА</a>
+        <a [routerLink]="['/asset', assetId, 'description']" routerLinkActive="active">ОПИСАНИЕ</a>
+      </nav>
+
+      <div class="tab-body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-backdrop" *ngIf="releaseFormOpen" (click)="closeReleaseForm()"></div>
+<section class="release-modal" *ngIf="releaseFormOpen" (click)="$event.stopPropagation()">
+  <h3>Освобождение устройства</h3>
+
+  <label class="field">
+    <span>Вид работы *</span>
+    <select [(ngModel)]="releaseForm.workType">
+      <option value="" disabled>Выберите вид работы</option>
+      <option *ngFor="let t of workTypes" [value]="t">{{ t }}</option>
+    </select>
+  </label>
+
+  <label class="field">
+    <span>Дополнительно</span>
+    <textarea [(ngModel)]="releaseForm.details" rows="4" placeholder="Комментарий..."></textarea>
+  </label>
+
+  <div class="field">
+    <span>Проблема на устройстве</span>
+
+    <label class="radio">
+      <input type="radio" name="problem" [(ngModel)]="releaseForm.problem" value="none" />
+      <span>Нет</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="problem" [(ngModel)]="releaseForm.problem" value="warning" />
+      <span>Предупреждение</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="problem" [(ngModel)]="releaseForm.problem" value="alarm" />
+      <span>Alarm</span>
+    </label>
+  </div>
+
+  <div class="modal-actions">
+    <button type="button" class="btn ghost" (click)="closeReleaseForm()">Отмена</button>
+    <button
+      type="button"
+      class="btn primary"
+      [disabled]="!canSubmitRelease"
+      (click)="submitRelease()"
+    >
+      {{ actionLoading ? 'Сохраняем...' : 'Освободить' }}
+    </button>
+  </div>
+</section>
